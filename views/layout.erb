@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+    <title>Mole</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/style.css" media="screen" rel="Stylesheet" type="text/css"></link>
+    <script>
+        function gel(element_id) {
+            return document.getElementById(element_id);
+        }
+        function show(element_id) {
+            gel(element_id).style.display = '';
+        }
+        function hide(element_id) {
+            gel(element_id).style.display = 'none';
+        }
+    </script>
+</head>
+
+<body>
+
+<% if logged_in? %>
+    <div id="nav">
+        <%= current_user.email %> : <a href="/">Home</a> | <a href="/admin">Admin</a> | <a href="/logout">Logout</a>
+    </div>
+<% end %>
+
+<div id="content">
+    <%= yield %>
+</div>
+
+<div id="footer">
+    powered by <a href="http://github.com/moomerman/mole/tree/master">mole</a> and 
+    <a href="http://github.com/bmizerany/sinatra/tree/master">sinatra</a>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<% if @entries.empty? %>
+    <p><i>You have no entries to display</i></p>
+<% end %>
+
+<p><%= link_to 'Add new entry', '#', :onclick => "show('new_entry')" %></p>
+
+<div id="new_entry" style="display:none">
+    <form action="/new" method="POST">
+        <p>
+            Project:
+            <select name="project">
+                <% @projects.each do |project| %>
+                    <option value="<%= project.id %>"><%= project.name %></option>
+                <% end %>
+            </select>
+            Hours: <input type="text" name="time" size="6"/>
+            Message: <input type="text" name="message"/>
+            <input type="submit" value="add"/> <%= link_to 'Cancel', '#', :onclick => "hide('new_entry')" %>
+        </p>
+    </form>
+</div>
+
+Yours | <%= link_to 'All', '#', :onclick => "alert('TODO')" %>
+
+<div id="entries">
+    <% @entries.each do |entry| %>
+        <div class="entry" id="entry_<%= entry.id %>">
+            <%= entry.message %> <%= entry.hours %> hours <small><%= time_ago_or_time_stamp(entry.created_at) %></small>
+        </div>
+    <% end %>
+</div>

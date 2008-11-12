@@ -1,0 +1,38 @@
+<h2>Projects</h2>
+
+<div id="projects">
+    <p><%= link_to 'Add new project', '#', :onclick => "show('new_project')" %></p>
+    <div id="new_project" style="display:none">
+        <form action="/admin/project" method="POST">
+            <p>
+                Name: <input type="text" name="name"/>
+                <input type="submit" value="add"/> <%= link_to 'Cancel', '#', :onclick => "hide('new_project')" %>
+            </p>
+        </form>
+    </div>
+        
+    <% @projects.each do |project| %>
+        <div class="project" id="project_<%= project.id %>">
+            <%= project.name %> | <%= link_to 'Delete', "/admin/project/#{project.id}/destroy" %>
+        </div>
+    <% end %>
+</div>
+
+<div id="users">
+    <p><%= link_to 'Add new user', '#', :onclick => "show('new_user')" %></p>
+    <div id="new_user" style="display:none">
+        <form action="/admin/user" method="POST">
+            <p>
+                Email: <input type="text" name="email"/>
+                Password: <input type="password" name="password"/>
+                <input type="submit" value="add"/> <%= link_to 'Cancel', '#', :onclick => "hide('new_user')" %>
+            </p>
+        </form>
+    </div>
+    
+    <% @users.each do |user| %>
+        <div class="user" id="project_<%= user.id %>">
+            <%= user.email %> | <%= link_to 'Delete', "/admin/user/#{user.id}/destroy" %>
+        </div>
+    <% end %>
+</div>
