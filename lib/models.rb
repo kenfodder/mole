@@ -56,4 +56,5 @@ class Entry < ActiveRecord::Base
 end
 
 class Note < ActiveRecord::Base
+  validates_presence_of :message
 end

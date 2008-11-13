@@ -14,6 +14,7 @@ before do
     session['forward'] = request.path_info + (request.query_string.blank? ? '' : '?' + request.query_string)
     redirect '/login'
   end
+  # TODO: Check the user has admin privileges to perform /admin/* actions
 end
 
 helpers do

@@ -37,7 +37,6 @@ class Schema < ActiveRecord::Migration
       t.text    :message
       t.timestamps
     end unless ActiveRecord::Base.connection.tables.include?('notes')
-
   end
 
   def self.down
