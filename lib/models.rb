@@ -10,24 +10,41 @@ class User < ActiveRecord::Base
   has_many :entries
   attr_accessor :password
   
-  def before_save
-    self.crypted_password = password
+  validates_presence_of :email, :crypted_password, :salt
+  
+  def before_validation
+    encrypt_password if password
   end
   
   def after_save
-    @password = nil
+    password = nil
   end
   
   def authenticate?(password)
-    password == self.crypted_password
+    Digest::SHA1.hexdigest("--#{self.salt}--#{password}--") == self.crypted_password
   end
   
+  private
+    def encrypt_password
+      self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.email}--")
+      self.crypted_password = Digest::SHA1.hexdigest("--#{self.salt}--#{password}--")
+    end
+    
+end
+
+class Client < ActiveRecord::Base
+  has_many :projects
+  validates_presence_of :name
+end
+
+class Project < ActiveRecord::Base
+  belongs_to :client
+  has_many :entries
+  validates_presence_of :name, :client
 end
 
 class Entry < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
-end
-
-class Project < ActiveRecord::Base
+  validates_presence_of :user, :project, :message, :hours
 end

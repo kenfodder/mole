@@ -1,0 +1,22 @@
+<h2><%= @client.name %></h2>
+
+<h3>Projects</h3>
+
+<div id="projects">
+    <p><%= link_to 'Add new project', '#', :onclick => "show('new_project')" %></p>
+    <div id="new_project" style="display:none">
+        <form action="/admin/project" method="POST">
+            <p>
+                <input type="hidden" name="client_id" value="<%= @client.id %>"/>
+                Name: <input type="text" name="name"/>
+                <input type="submit" value="add"/> <%= link_to 'Cancel', '#', :onclick => "hide('new_project')" %>
+            </p>
+        </form>
+    </div>
+        
+    <% @projects.each do |project| %>
+        <div class="project" id="project_<%= project.id %>">
+            <%= project.name %> | <%= link_to 'Delete', "/admin/project/#{project.id}/destroy" %>
+        </div>
+    <% end %>
+</div>

@@ -16,7 +16,7 @@ namespace :mole do
   end
   
   task :init => :db_up do
-     User.create(:email => 'admin@admin.com', :password => 'admin')
+     User.create!(:email => 'admin@admin.com', :password => 'admin')
   end
   
   task :reset => [:db_down, :init]

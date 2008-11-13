@@ -57,8 +57,8 @@ end
 # -- Admin actions
 
 get '/admin' do
-  @projects = Project.find(:all)
   @users = User.find(:all)
+  @clients = Client.find(:all)
   erb :admin
 end
 
@@ -72,8 +72,24 @@ get '/admin/user/:user_id/destroy' do
   redirect '/admin'
 end
 
+post '/admin/client' do
+  Client.create!(:name => params[:name])
+  redirect '/admin'
+end
+
+get '/admin/client/:client_id' do
+  @client = Client.find(params[:client_id])
+  @projects = @client.projects
+  erb :client
+end
+
+get '/admin/client/:client_id/destroy' do
+  Client.find(params[:client_id]).destroy
+  redirect '/admin'
+end
+
 post '/admin/project' do
-  Project.create!(:name => params[:name])
+  Project.create!(:name => params[:name], :client_id => params[:client_id])
   redirect '/admin'
 end
 
