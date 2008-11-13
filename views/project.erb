@@ -3,7 +3,7 @@
 <ul>
     <li>Client: <%= link_to @project.client.name, "/client/#{@project.client.id}" %></li>
     <li>Time spent: <%= @project.hours_spent %> hours</li>
-    <li><%= image_tag 'minus.png' %> <%= link_to 'Delete this project', "/admin/project/#{@project.id}/destroy" %></li>
+    <li><%= image_tag 'minus.png' %> <%= link_to 'Delete this project', "/project/#{@project.id}/destroy" %></li>
 </ul>
 
 <h3>Activity</h3>

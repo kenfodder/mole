@@ -16,7 +16,11 @@ namespace :mole do
   end
   
   task :init => :db_up do
-     User.create!(:email => 'admin@admin.com', :password => 'admin')
+    email = 'mole@example.com'
+    password = 'mole'
+    User.create!(:email => email, :password => password)
+    puts " **** Created default user account with email: '#{email}' and password '#{password}'"
+    puts
   end
   
   task :reset => [:db_down, :init]

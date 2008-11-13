@@ -2,7 +2,7 @@
 
 <p><%= image_tag 'add.png' %> <%= link_to 'Add new client', '#', :onclick => "show('new_client')" %></p>
 <div id="new_client" style="display:none">
-    <form action="/admin/client" method="POST">
+    <form action="/client" method="POST">
         <p>
             Name: <input type="text" name="name"/>
             Contact Name: <input type="text" name="contact_name"/>

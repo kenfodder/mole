@@ -35,16 +35,6 @@ get '/logout' do
   redirect '/login'
 end
 
-post '/new' do
-  Entry.create!(
-    :user => current_user, 
-    :project_id => params[:project],
-    :hours => params[:hours],
-    :message => params[:message]
-  )
-  redirect '/'
-end
-
 post '/login' do
   @email = params[:email]
   if user = User.find_by_email(@email) and user.authenticate?(params[:password])
@@ -53,6 +43,8 @@ post '/login' do
   end
   erb :login
 end
+
+# -- Clients
 
 get '/clients' do
   @clients = Client.find(:all).reverse
@@ -65,9 +57,47 @@ get '/client/:client_id' do
   erb :client
 end
 
+post '/client' do
+  client = Client.create!(
+    :name => params[:name],
+    :contact_name => params[:contact_name],
+    :contact_telephone => params[:contact_telephone]
+  )
+  redirect "/client/#{client.id}"
+end
+
+get '/client/:client_id/destroy' do
+  Client.find(params[:client_id]).destroy
+  redirect '/clients'
+end
+
+# -- Projects
+
 get '/project/:project_id' do
   @project = Project.find(params[:project_id])
   erb :project
+end
+
+post '/project' do
+  project = Project.create!(:name => params[:name], :client_id => params[:client_id])
+  redirect "/client/#{project.client.id}"
+end
+
+get '/project/:project_id/destroy' do
+  Project.find(params[:project_id]).destroy
+  redirect '/admin'
+end
+
+# -- Entries
+
+post '/entry' do
+  Entry.create!(
+    :user => current_user, 
+    :project_id => params[:project],
+    :hours => params[:hours],
+    :message => params[:message]
+  )
+  redirect '/'
 end
 
 # -- Admin actions
@@ -84,30 +114,6 @@ post '/admin/user' do
 end
 
 get '/admin/user/:user_id/destroy' do
-  User.find(params[:user_id]).destroy
-  redirect '/admin'
-end
-
-post '/admin/client' do
-  client = Client.create!(
-    :name => params[:name],
-    :contact_name => params[:contact_name],
-    :contact_telephone => params[:contact_telephone]
-  )
-  redirect "/client/#{client.id}"
-end
-
-get '/admin/client/:client_id/destroy' do
-  Client.find(params[:client_id]).destroy
-  redirect '/clients'
-end
-
-post '/admin/project' do
-  project = Project.create!(:name => params[:name], :client_id => params[:client_id])
-  redirect "/client/#{project.client.id}"
-end
-
-get '/admin/project/:project_id/destroy' do
-  Project.find(params[:project_id]).destroy
+  User.find(params[:user_id]).destroy unless current_user.id == params[:user_id].to_i
   redirect '/admin'
 end

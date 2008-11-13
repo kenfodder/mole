@@ -14,7 +14,7 @@
     
     <% @users.each do |user| %>
         <div class="user" id="project_<%= user.id %>">
-            <%= user.email %> <%= link_to image_tag('minus.png'), "/admin/user/#{user.id}/destroy" %>
+            <%= user.email %> <%= link_to(image_tag('minus.png'), "/admin/user/#{user.id}/destroy") unless current_user.id == user.id %>
         </div>
     <% end %>
 </div>
