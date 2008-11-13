@@ -1,0 +1,12 @@
+<h2>Prioject: <%= @project.name %></h2>
+Client: <%= link_to @project.client.name, "/client/#{@project.client.id}" %>
+
+<h3>Activity</h3>
+
+<div id="entries">
+    <% @project.entries.each do |entry| %>
+        <%= entry.user.email %>
+        <%= entry.message %> <%= entry.hours %> hours 
+        <small><%= time_ago_or_time_stamp(entry.created_at) %></small>
+    <% end %>
+</div>

@@ -54,6 +54,17 @@ post '/login' do
   erb :login
 end
 
+get '/client/:client_id' do
+  @client = Client.find(params[:client_id])
+  @projects = @client.projects
+  erb :client
+end
+
+get '/project/:project_id' do
+  @project = Project.find(params[:project_id])
+  erb :project
+end
+
 # -- Admin actions
 
 get '/admin' do
@@ -79,12 +90,6 @@ post '/admin/client' do
     :contact_telephone => params[:contact_telephone]
   )
   redirect '/admin'
-end
-
-get '/admin/client/:client_id' do
-  @client = Client.find(params[:client_id])
-  @projects = @client.projects
-  erb :client
 end
 
 get '/admin/client/:client_id/destroy' do

@@ -1,4 +1,4 @@
-<h2><%= @client.name %></h2>
+<h2>Client: <%= @client.name %></h2>
 
 <h3>Contact Details</h3>
 
@@ -23,7 +23,7 @@
         
     <% @projects.each do |project| %>
         <div class="project" id="project_<%= project.id %>">
-            <%= project.name %> | <%= link_to 'Delete', "/admin/project/#{project.id}/destroy" %>
+            <%= link_to project.name, "/project/#{project.id}" %> | <%= link_to 'Delete', "/admin/project/#{project.id}/destroy" %>
         </div>
     <% end %>
 </div>

@@ -15,7 +15,7 @@
         
     <% @clients.each do |client| %>
         <div class="client" id="project_<%= client.id %>">
-            <%= link_to client.name, "/admin/client/#{client.id}" %> | <%= link_to 'Delete', "/admin/client/#{client.id}/destroy" %>
+            <%= link_to client.name, "/client/#{client.id}" %> | <%= link_to 'Delete', "/admin/client/#{client.id}/destroy" %>
         </div>
     <% end %>
 </div>
