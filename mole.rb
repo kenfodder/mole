@@ -54,6 +54,11 @@ post '/login' do
   erb :login
 end
 
+get '/clients' do
+  @clients = Client.find(:all).reverse
+  erb :clients
+end
+
 get '/client/:client_id' do
   @client = Client.find(params[:client_id])
   @projects = @client.projects
@@ -84,17 +89,17 @@ get '/admin/user/:user_id/destroy' do
 end
 
 post '/admin/client' do
-  Client.create!(
+  client = Client.create!(
     :name => params[:name],
     :contact_name => params[:contact_name],
     :contact_telephone => params[:contact_telephone]
   )
-  redirect '/admin'
+  redirect "/client/#{client.id}"
 end
 
 get '/admin/client/:client_id/destroy' do
   Client.find(params[:client_id]).destroy
-  redirect '/admin'
+  redirect '/clients'
 end
 
 post '/admin/project' do

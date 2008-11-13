@@ -24,7 +24,10 @@
 
 <% if logged_in? %>
     <div id="nav">
-        <%= current_user.email %> : <a href="/">Home</a> | <a href="/admin">Admin</a> | <a href="/logout">Logout</a>
+        <%= current_user.email %> : <a href="/admin">Admin</a> | <a href="/logout">Logout</a>
+    </div>
+    <div>
+        <%= link_to 'Home', '/' %> | <%= link_to 'Clients', '/clients' %>
     </div>
 <% end %>
 

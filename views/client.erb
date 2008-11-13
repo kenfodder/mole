@@ -5,12 +5,13 @@
 <ul>
     <li><%= @client.contact_name %></li>
     <li><%= @client.contact_telephone %></li>
+    <li><%= image_tag 'minus.png' %> <%= link_to 'Delete this client', "/admin/client/#{@client.id}/destroy" %></li>
 </ul>
 
 <h3>Projects</h3>
 
 <div id="projects">
-    <p><%= link_to 'Add new project', '#', :onclick => "show('new_project')" %></p>
+    <p><%= image_tag 'add.png' %> <%= link_to 'Add new project', '#', :onclick => "show('new_project')" %></p>
     <div id="new_project" style="display:none">
         <form action="/admin/project" method="POST">
             <p>
@@ -23,7 +24,7 @@
         
     <% @projects.each do |project| %>
         <div class="project" id="project_<%= project.id %>">
-            <%= link_to project.name, "/project/#{project.id}" %> | <%= link_to 'Delete', "/admin/project/#{project.id}/destroy" %>
+            <%= link_to project.name, "/project/#{project.id}" %>
         </div>
     <% end %>
 </div>
