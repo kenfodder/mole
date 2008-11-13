@@ -31,6 +31,13 @@ class Schema < ActiveRecord::Migration
       t.timestamps
     end unless ActiveRecord::Base.connection.tables.include?('entries')
     
+    create_table :notes do |t|
+      t.integer :client_id
+      t.integer :project_id
+      t.text    :message
+      t.timestamps
+    end unless ActiveRecord::Base.connection.tables.include?('notes')
+
   end
 
   def self.down
@@ -38,6 +45,7 @@ class Schema < ActiveRecord::Migration
     drop_table :entries if ActiveRecord::Base.connection.tables.include?('entries')
     drop_table :projects if ActiveRecord::Base.connection.tables.include?('projects')
     drop_table :clients if ActiveRecord::Base.connection.tables.include?('clients')
+    drop_table :notes if ActiveRecord::Base.connection.tables.include?('notes')
   end
   
 end

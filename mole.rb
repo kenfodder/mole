@@ -99,7 +99,7 @@ end
 
 post '/admin/project' do
   project = Project.create!(:name => params[:name], :client_id => params[:client_id])
-  redirect "/admin/client/#{project.client.id}"
+  redirect "/client/#{project.client.id}"
 end
 
 get '/admin/project/:project_id/destroy' do

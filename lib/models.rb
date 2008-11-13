@@ -41,10 +41,19 @@ class Project < ActiveRecord::Base
   belongs_to :client
   has_many :entries
   validates_presence_of :name, :client
+  
+  def hours_spent
+    total = 0
+    self.entries.each{|x| total += x.hours}
+    total
+  end
 end
 
 class Entry < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
   validates_presence_of :user, :project, :message, :hours
+end
+
+class Note < ActiveRecord::Base
 end
