@@ -34,6 +34,7 @@ end
 
 class Client < ActiveRecord::Base
   has_many :projects
+  has_many :contacts
   validates_presence_of :name
 end
 
@@ -55,6 +56,12 @@ class Entry < ActiveRecord::Base
   validates_presence_of :user, :project, :message, :hours
 end
 
+class Contact < ActiveRecord::Base
+  belongs_to :client
+  validates_presence_of :name
+end
+
 class Note < ActiveRecord::Base
   validates_presence_of :message
 end
+

@@ -1,0 +1,10 @@
+<ul>
+    <% @people.each do |contact| %>
+        <li>
+            <%= image_tag contact.image_url %>
+            <%= contact.name %>
+            of <%= link_to contact.client.name, "/client/#{contact.client.id}" %>
+            <%= contact.telephone %>
+        </li>
+    <% end %>
+</ul>

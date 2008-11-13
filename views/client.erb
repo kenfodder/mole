@@ -1,12 +1,32 @@
 <h2>Client: <%= @client.name %></h2>
 
-<h3>Contact Details</h3>
+<%= image_tag(@client.image_url, :class => 'client_logo') %>
+
+<h3>Contacts</h3>
 
 <ul>
-    <li><%= @client.contact_name %></li>
-    <li><%= @client.contact_telephone %></li>
-    <li><%= image_tag 'minus.png' %> <%= link_to 'Delete this client', "/client/#{@client.id}/destroy" %></li>
+    <% @client.contacts.each do |contact| %>
+        <li>
+            <%= image_tag contact.image_url %>
+            <%= contact.name %>
+            <%= contact.telephone %>
+            <%= link_to image_tag('minus.png'), "/contact/#{contact.id}/destroy" %>
+        </li>
+    <% end %>
 </ul>
+
+<p><%= image_tag 'add.png' %> <%= link_to 'Add new contact', '#', :onclick => "show('new_contact')" %></p>
+<div id="new_contact" style="display:none">
+    <form action="/person" method="POST">
+        <p>
+            <input type="hidden" name="client_id" value="<%= @client.id %>"/>
+            Name: <input type="text" name="name"/>
+            Telephone: <input type="text" name="telephone"/>
+            Image: <input type="text" name="image_url"/>
+            <input type="submit" value="add"/> <%= link_to 'Cancel', '#', :onclick => "hide('new_contact')" %>
+        </p>
+    </form>
+</div>
 
 <h3>Projects</h3>
 

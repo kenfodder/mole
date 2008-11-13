@@ -5,7 +5,7 @@ module Helpers
   end
   
   def current_user
-    User.find(session[:user]) if logged_in?
+    User.find_by_id(session[:user]) if logged_in?
   end
   
   def partial(name, options={})
@@ -13,7 +13,10 @@ module Helpers
   end
 
   def image_tag(file, options={})
-    tag = "<img src='/images/#{file}'"
+    tag = "<img src='"
+    tag += "/images/" unless file =~ /^http:\/\//
+    tag += "#{file}'"
+    tag += " class=\"#{options[:class]}\"" if options[:class]
     tag += " alt='#{options[:alt]}' title='#{options[:alt]}' " if options[:alt]
     tag += "/>"
   end

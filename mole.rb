@@ -10,11 +10,10 @@ configure do
 end
 
 before do
-  if !logged_in? and request.path_info !~ /login/ 
+  if (!logged_in? or !current_user) and request.path_info !~ /login/ 
     session['forward'] = request.path_info + (request.query_string.blank? ? '' : '?' + request.query_string)
     redirect '/login'
   end
-  # TODO: Check the user has admin privileges to perform /admin/* actions
 end
 
 helpers do
@@ -61,8 +60,7 @@ end
 post '/client' do
   client = Client.create!(
     :name => params[:name],
-    :contact_name => params[:contact_name],
-    :contact_telephone => params[:contact_telephone]
+    :image_url => params[:image_url]
   )
   redirect "/client/#{client.id}"
 end
@@ -85,8 +83,10 @@ post '/project' do
 end
 
 get '/project/:project_id/destroy' do
-  Project.find(params[:project_id]).destroy
-  redirect '/admin'
+  project = Project.find(params[:project_id])
+  client = project.client
+  project.destroy
+  redirect "/client/#{client.id}"
 end
 
 # -- Entries
@@ -99,6 +99,23 @@ post '/entry' do
     :message => params[:message]
   )
   redirect '/'
+end
+
+# -- People
+
+get '/people' do
+  @people = Contact.find(:all).reverse
+  erb :people
+end
+
+post '/person' do
+  contact = Contact.create!(
+    :client_id => params[:client_id],
+    :name => params[:name],
+    :telephone => params[:telephone],
+    :image_url => params[:image_url]
+  )
+  redirect "/client/#{contact.client.id}"
 end
 
 # -- Admin actions

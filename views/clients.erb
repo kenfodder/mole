@@ -5,8 +5,7 @@
     <form action="/client" method="POST">
         <p>
             Name: <input type="text" name="name"/>
-            Contact Name: <input type="text" name="contact_name"/>
-            Contact Telephone: <input type="text" name="contact_telephone"/>
+            Image: <input type="text" name="image_url"/>
             <input type="submit" value="add"/> <%= link_to 'Cancel', '#', :onclick => "hide('new_client')" %>
         </p>
     </form>
@@ -14,9 +13,10 @@
 
 <% @clients.each do |client| %>
     <div>
+        <%= link_to(image_tag(client.image_url, :class => 'client_logo'), "/client/#{client.id}") %>
         <%= link_to client.name, "/client/#{client.id}" %>
         <ul>
-            <% client.projects.reverse[0..3].each do |project| %>
+            <% client.projects.reverse.each do |project| %>
                 <li><%= link_to project.name, "/project/#{project.id}" %></li>
             <% end %>
         </ul>
