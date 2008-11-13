@@ -131,6 +131,7 @@ end
 post '/note' do
   note = Note.create!(
     :client_id => params[:client_id],
+    :user => current_user,
     :message => params[:message]
   )
   redirect "/client/#{note.client.id}"

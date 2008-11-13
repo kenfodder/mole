@@ -17,7 +17,11 @@
         
     <% @client.notes.reverse.each do |note| %>
         <div class="note" id="project_<%= note.id %>">
-            <%= note.message %> <small><%= time_ago_or_time_stamp(note.created_at) %></small>
+            <%= note.message %> 
+            <small>
+                <%= time_ago_or_time_stamp(note.created_at) %>
+                <% if note.user %>by <%= note.user.email %><% end %>
+            </small>
         </div>
     <% end %>
 </div>
