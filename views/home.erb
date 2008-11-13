@@ -2,7 +2,10 @@
     <p><i>You have no entries to display</i></p>
 <% end %>
 
-<p><%= link_to 'Add new entry', '#', :onclick => "show('new_entry')" %></p>
+<p>
+    <%= link_to image_tag('add.png') %>
+    <%= link_to 'Add new entry', '#', :onclick => "show('new_entry')" %>
+</p>
 
 <div id="new_entry" style="display:none">
     <form action="/entry" method="POST">
@@ -25,7 +28,7 @@ Yours | <%= link_to 'All', '#', :onclick => "alert('TODO')" %>
 <div id="entries">
     <% @entries.each do |entry| %>
         <div class="entry" id="entry_<%= entry.id %>">
-            <%= link_to entry.project.client.name, "/client/#{entry.project.client.id}" %>
+            <%= link_to entry.project.client.name, "/client/#{entry.project.client.id}" %> /
             <%= link_to entry.project.name, "/project/#{entry.project.id}" %>
             <%= entry.message %> <%= entry.hours %> hours 
             <small><%= time_ago_or_time_stamp(entry.created_at) %></small>

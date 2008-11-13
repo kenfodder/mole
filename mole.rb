@@ -10,7 +10,8 @@ configure do
 end
 
 before do
-  if (!logged_in? or !current_user) and request.path_info !~ /login/ 
+  session[:user] = nil if logged_in? and !current_user
+  if !logged_in? and request.path_info !~ /login/ 
     session['forward'] = request.path_info + (request.query_string.blank? ? '' : '?' + request.query_string)
     redirect '/login'
   end

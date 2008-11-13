@@ -29,7 +29,6 @@ class User < ActiveRecord::Base
       self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{self.email}--")
       self.crypted_password = Digest::SHA1.hexdigest("--#{self.salt}--#{password}--")
     end
-    
 end
 
 class Client < ActiveRecord::Base

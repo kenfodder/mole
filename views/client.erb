@@ -2,18 +2,7 @@
 
 <%= image_tag(@client.image_url, :class => 'client_logo') %>
 
-<h3>Contacts</h3>
-
-<ul>
-    <% @client.contacts.each do |contact| %>
-        <li>
-            <%= image_tag contact.image_url %>
-            <%= contact.name %>
-            <%= contact.telephone %>
-            <%= link_to image_tag('minus.png'), "/contact/#{contact.id}/destroy" %>
-        </li>
-    <% end %>
-</ul>
+<h3>People</h3>
 
 <p><%= image_tag 'add.png' %> <%= link_to 'Add new contact', '#', :onclick => "show('new_contact')" %></p>
 <div id="new_contact" style="display:none">
@@ -27,6 +16,17 @@
         </p>
     </form>
 </div>
+
+<ul>
+    <% @client.contacts.each do |contact| %>
+        <li>
+            <%= image_tag contact.image_url %>
+            <%= contact.name %>
+            <%= contact.telephone %>
+            <%= link_to image_tag('minus.png'), "/contact/#{contact.id}/destroy" %>
+        </li>
+    <% end %>
+</ul>
 
 <h3>Projects</h3>
 
