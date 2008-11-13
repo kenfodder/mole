@@ -41,7 +41,12 @@ class Project < ActiveRecord::Base
   belongs_to :client
   has_many :entries
   validates_presence_of :name, :client
-  
+  def after_create
+    self.client.notes.create(:message => "Created new project called #{self.name}")
+  end
+  def after_destroy
+    self.client.notes.create(:message => "Removed project called #{self.name}")
+  end
   def hours_spent
     total = 0
     self.entries.each{|x| total += x.hours}
@@ -58,6 +63,12 @@ end
 class Contact < ActiveRecord::Base
   belongs_to :client
   validates_presence_of :name
+  def after_create
+    self.client.notes.create(:message => "Created new person called #{self.name}")
+  end
+  def after_destroy
+    self.client.notes.create(:message => "Removed person called #{self.name}")
+  end
 end
 
 class Note < ActiveRecord::Base

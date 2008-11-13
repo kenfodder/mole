@@ -80,7 +80,6 @@ end
 
 post '/project' do
   project = Project.create!(:name => params[:name], :client_id => params[:client_id])
-  project.client.notes.create(:message => "Created new project called #{project.name}")
   redirect "/client/#{project.client.id}"
 end
 
@@ -118,6 +117,13 @@ post '/person' do
     :image_url => params[:image_url]
   )
   redirect "/client/#{contact.client.id}"
+end
+
+get '/person/:person_id/destroy' do
+  contact = Contact.find(params[:person_id])
+  client = contact.client
+  contact.destroy
+  redirect "/client/#{client.id}"
 end
 
 # -- Notes

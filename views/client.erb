@@ -24,7 +24,7 @@
 
 <h3>People</h3>
 
-<p><%= image_tag 'add.png' %> <%= link_to 'Add new contact', '#', :onclick => "show('new_contact')" %></p>
+<p><%= image_tag 'add.png' %> <%= link_to 'Add new person', '#', :onclick => "show('new_contact')" %></p>
 <div id="new_contact" style="display:none">
     <form action="/person" method="POST">
         <p>
@@ -43,7 +43,7 @@
             <%= image_tag contact.image_url %>
             <%= contact.name %>
             <%= contact.telephone %>
-            <%= link_to image_tag('minus.png'), "/contact/#{contact.id}/destroy" %>
+            <%= link_to image_tag('minus.png'), "/person/#{contact.id}/destroy" %>
         </li>
     <% end %>
 </ul>
