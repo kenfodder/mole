@@ -6,6 +6,8 @@
         <form action="/admin/client" method="POST">
             <p>
                 Name: <input type="text" name="name"/>
+                Contact Name: <input type="text" name="contact_name"/>
+                Contact Telephone: <input type="text" name="contact_telephone"/>
                 <input type="submit" value="add"/> <%= link_to 'Cancel', '#', :onclick => "hide('new_client')" %>
             </p>
         </form>

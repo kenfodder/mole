@@ -73,7 +73,11 @@ get '/admin/user/:user_id/destroy' do
 end
 
 post '/admin/client' do
-  Client.create!(:name => params[:name])
+  Client.create!(
+    :name => params[:name],
+    :contact_name => params[:contact_name],
+    :contact_telephone => params[:contact_telephone]
+  )
   redirect '/admin'
 end
 
@@ -89,8 +93,8 @@ get '/admin/client/:client_id/destroy' do
 end
 
 post '/admin/project' do
-  Project.create!(:name => params[:name], :client_id => params[:client_id])
-  redirect '/admin'
+  project = Project.create!(:name => params[:name], :client_id => params[:client_id])
+  redirect "/admin/client/#{project.client.id}"
 end
 
 get '/admin/project/:project_id/destroy' do
