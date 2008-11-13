@@ -1,7 +1,7 @@
 <h2>Users</h2>
 
 <div id="users">
-    <p><%= link_to 'Add new user', '#', :onclick => "show('new_user')" %></p>
+    <p><%= image_tag 'add.png' %> <%= link_to 'Add new user', '#', :onclick => "show('new_user')" %></p>
     <div id="new_user" style="display:none">
         <form action="/admin/user" method="POST">
             <p>
@@ -14,7 +14,7 @@
     
     <% @users.each do |user| %>
         <div class="user" id="project_<%= user.id %>">
-            <%= user.email %> | <%= link_to 'Delete', "/admin/user/#{user.id}/destroy" %>
+            <%= user.email %> <%= link_to image_tag('minus.png'), "/admin/user/#{user.id}/destroy" %>
         </div>
     <% end %>
 </div>
