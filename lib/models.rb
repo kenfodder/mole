@@ -9,7 +9,6 @@ ActiveRecord::Base.establish_connection(
 class User < ActiveRecord::Base
   has_many :entries
   attr_accessor :password
-  
   validates_presence_of :email, :crypted_password, :salt
   
   def before_validation
@@ -34,6 +33,7 @@ end
 class Client < ActiveRecord::Base
   has_many :projects
   has_many :contacts
+  has_many :notes
   validates_presence_of :name
 end
 
@@ -61,6 +61,7 @@ class Contact < ActiveRecord::Base
 end
 
 class Note < ActiveRecord::Base
+  belongs_to :client
   validates_presence_of :message
 end
 

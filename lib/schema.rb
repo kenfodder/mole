@@ -40,7 +40,6 @@ class Schema < ActiveRecord::Migration
     
     create_table :notes do |t|
       t.integer :client_id, :null => false
-      t.integer :project_id, :null => false
       t.text    :message
       t.timestamps
     end unless ActiveRecord::Base.connection.tables.include?('notes')

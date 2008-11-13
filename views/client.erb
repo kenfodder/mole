@@ -2,6 +2,26 @@
 
 <%= image_tag(@client.image_url, :class => 'client_logo') %>
 
+<h3>Notes</h3>
+
+<div id="notes">
+    <div>
+        <form action="/note" method="POST">
+            <p>
+                <input type="hidden" name="client_id" value="<%= @client.id %>"/>
+                <textarea name="message"></textarea>
+                <input type="submit" value="new note"/>
+            </p>
+        </form>
+    </div>
+        
+    <% @client.notes.reverse.each do |note| %>
+        <div class="note" id="project_<%= note.id %>">
+            <%= note.message %> <small><%= time_ago_or_time_stamp(note.created_at) %></small>
+        </div>
+    <% end %>
+</div>
+
 <h3>People</h3>
 
 <p><%= image_tag 'add.png' %> <%= link_to 'Add new contact', '#', :onclick => "show('new_contact')" %></p>
