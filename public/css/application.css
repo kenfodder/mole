@@ -1,0 +1,39 @@
+/* @override http://localhost:4567/css/application.css */
+
+/* links */
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+/* tabs */
+ul.tabs {
+	list-style: none;
+}
+ul.tabs li {
+	float: left;
+	background-color: #7e7e7e;
+	margin: 0 1px;
+}
+ul.tabs li.selected, div.header a:hover {
+	background-color: #333;
+}
+ul.tabs a {
+	display: block;
+	padding: 2px 6px;
+	color: #FF9900;
+}
+
+/* header */
+div.header {
+	font-size: 1.5em;
+	border-top: 10px solid #333;
+}
+div.header ul.entities {
+	float: left;
+}
+div.header ul.nav {
+	float: right;
+}

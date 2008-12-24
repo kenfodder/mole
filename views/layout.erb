@@ -1,35 +1,44 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <title>Mole</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection">
+        <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print"> 
+        <!--[if IE]>
+          <link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection">
+        <![endif]-->
+        <link rel="stylesheet" href="css/application.css" type="text/css" media="screen, projection">
+        
+        <script type="text/javascript" src="/script.js"></script>
+    </head>
 
-<head>
-    <title>Mole</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="/style.css" media="screen" rel="Stylesheet" type="text/css"></link>
-    <script type="text/javascript" src="/script.js"></script>
-</head>
+    <body class="">
 
-<body>
+        <div class="container">
+            <% if logged_in? %>
+                <div class="header span-18">
+                    <ul class="tabs entities">
+                        <li class="selected"><%= link_to 'Clients', '/clients' %></li>
+                        <li><%= link_to 'People', '/people' %></li>
+                    </ul>
+                    <ul class="tabs nav">
+                        <li><%= link_to 'Home', '/' %></li>
+                        <li><a href="/admin">Admin</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    </ul>
+                </div>
+            <% end %>
+            
+            <%= yield %>
+            
+            <div class="footer span-18">
+                <a href="http://github.com/moomerman/mole/tree/master" target="_new">mole</a> was  
+                <a href="http://madewithchopsticks.com" target="_new">made with chopsticks</a>
+            </div>
+        </div>
 
-<% if logged_in? %>
-    <div id="nav">
-        <%= current_user.email %> : <a href="/admin">Admin</a> | <a href="/logout">Logout</a>
-    </div>
-    <div>
-        <%= link_to 'Home', '/' %> | <%= link_to 'Clients', '/clients' %> | <%= link_to 'People', '/people' %>
-    </div>
-<% end %>
-
-<div id="content">
-    <%= yield %>
-</div>
-
-<div id="footer">
-    <a href="http://github.com/moomerman/mole/tree/master" target="_new">mole</a> was  
-    <a href="http://madewithchopsticks.com" target="_new">made with chopsticks</a>
-</div>
-
-</body>
-
+    </body>
 </html>
