@@ -15,30 +15,8 @@
         <script type="text/javascript" src="/script.js"></script>
     </head>
 
-    <body class="">
-
-        <div class="container">
-            <% if logged_in? %>
-                <div class="header span-18">
-                    <ul class="tabs entities">
-                        <li class="selected"><%= link_to 'Clients', '/clients' %></li>
-                        <li><%= link_to 'People', '/people' %></li>
-                    </ul>
-                    <ul class="tabs nav">
-                        <li><%= link_to 'Home', '/' %></li>
-                        <li><a href="/admin">Admin</a></li>
-                        <li><a href="/logout">Logout</a></li>
-                    </ul>
-                </div>
-            <% end %>
-            
-            <%= yield %>
-            
-            <div class="footer span-18">
-                <a href="http://github.com/moomerman/mole/tree/master" target="_new">mole</a> was  
-                <a href="http://madewithchopsticks.com" target="_new">made with chopsticks</a>
-            </div>
-        </div>
-
+    <body>
+        <%= yield %>
     </body>
+    
 </html>

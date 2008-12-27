@@ -1,37 +1,68 @@
-<% if @entries.empty? %>
-    <p><i>You have no entries to display</i></p>
-<% end %>
+<div class="top">
+    <div class="container">
+        
+        <% if logged_in? %>
+            <div class="header span-18">
+                <ul class="tabs entities">
+                    <li class="selected"><%= link_to 'Clients', '/clients' %></li>
+                    <li><%= link_to 'People', '/people' %></li>
+                </ul>
+                <ul class="tabs nav">
+                    <li><%= link_to 'Home', '/' %></li>
+                    <li><a href="/admin">Admin</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
+        <% end %>
+        
+        <form action="/entry" method="POST" class="column append-bottom">
 
-<p>
-    <%= link_to image_tag('add.png') %>
-    <%= link_to 'Add new entry', '#', :onclick => "show('new_entry')" %>
-</p>
+            <input type="text" name="hours" size="6" class="hours" value="" />
 
-<div id="new_entry" style="display:none">
-    <form action="/entry" method="POST">
-        <p>
-            Project:
             <select name="project">
                 <% @projects.each do |project| %>
                     <option value="<%= project.id %>"><%= project.client.name %>: <%= project.name %></option>
                 <% end %>
             </select>
-            Hours: <input type="text" name="hours" size="6"/>
-            Message: <input type="text" name="message"/>
-            <input type="submit" value="add"/> <%= link_to 'Cancel', '#', :onclick => "hide('new_entry')" %>
-        </p>
-    </form>
+
+            <input type="text" name="message" class="message" value="" />
+
+            <input type="submit" value="add"/>
+
+        </form>
+
+        <!-- <% if @entries.empty? %>
+            <p><i>You have no entries to display</i></p>
+        <% end %> -->
+
+        <!-- Yours | <%= link_to 'All', '#', :onclick => "alert('TODO')" %> -->
+    </div>
 </div>
 
-Yours | <%= link_to 'All', '#', :onclick => "alert('TODO')" %>
-
-<div id="entries">
-    <% @entries.each do |entry| %>
-        <div class="entry" id="entry_<%= entry.id %>">
-            <%= link_to entry.project.client.name, "/client/#{entry.project.client.id}" %> /
-            <%= link_to entry.project.name, "/project/#{entry.project.id}" %>
-            <%= entry.message %> <%= entry.hours %> hours 
-            <small><%= time_ago_or_time_stamp(entry.created_at) %></small>
-        </div>
-    <% end %>
+<div class="bottom">
+    <div class="container">
+        <table>
+            <% @entries.each do |entry| %>
+                <tr>
+                    <td>
+                        <%= entry.hours %>h
+                    </td>
+                    <td>
+                        <%= entry.message %> 
+                    </td>
+                    <td>
+                        <%= link_to entry.project.client.name, "/client/#{entry.project.client.id}" %>:
+                        <%= link_to entry.project.name, "/project/#{entry.project.id}" %>
+                    </td>
+                    <td>
+                        <small><%= time_ago_or_time_stamp(entry.created_at) %></small>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+    <div class="container footer">
+        <a href="http://github.com/moomerman/mole/tree/master" target="_new">mole</a> was  
+        <a href="http://madewithchopsticks.com" target="_new">made with chopsticks</a>
+    </div>
 </div>

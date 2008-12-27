@@ -1,5 +1,18 @@
 /* @override http://localhost:4567/css/application.css */
 
+body {
+	background-color: #333;
+}
+div.top {
+	background-color: #fff;
+}
+div.bottom div.container {
+	background-color: #333;
+}
+div.bottom div.footer {
+	background-color: #fff;
+}
+
 /* links */
 a {
 	text-decoration: none;
@@ -36,4 +49,38 @@ div.header ul.entities {
 }
 div.header ul.nav {
 	float: right;
+}
+
+/* footer */
+div.footer {
+	background-color: #333;
+}
+
+/* form */
+form {
+	width: 690px;
+	background-color: #333;
+	padding: 10px;
+}
+form select {
+	width: 100px;
+	height: 30px;
+}
+form input, form select {
+	margin-right: 10px;
+	height: 25px;
+	font-size: 1.3em;
+}
+form input.time {
+	width: 70px;
+}
+form input.message {
+	width: 350px;
+}
+
+/* table */
+table {
+	margin-top: 10px;
+	background-color: #7e7e7e;
+	padding: 10px;
 }
